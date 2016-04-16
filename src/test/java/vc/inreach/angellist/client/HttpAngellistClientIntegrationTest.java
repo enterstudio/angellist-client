@@ -2,8 +2,11 @@ package vc.inreach.angellist.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.Resources;
 import io.dropwizard.jackson.Jackson;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.filter.LoggingFilter;
@@ -25,14 +28,17 @@ public class HttpAngellistClientIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
+        final String apiKey = Resources.toString(Resources.getResource(".angellist_key"), Charsets.US_ASCII).replaceAll("\\W", "");
+
         final ObjectMapper objectMapper = Jackson.newObjectMapper();
         objectMapper.registerModule(new Jdk8Module());
+        objectMapper.registerModule(new JavaTimeModule());
         final JacksonJaxbJsonProvider jacksonProvider = new JacksonJaxbJsonProvider();
         jacksonProvider.setMapper(objectMapper);
         final Client client = ClientBuilder.newClient(new ClientConfig(jacksonProvider));
         client.register(new LoggingFilter());
 
-        angellistClient = new HttpAngellistClient(client, "XXX", "https://api.angel.co");
+        angellistClient = new HttpAngellistClient(client, apiKey, "https://api.angel.co");
     }
 
     @Test
