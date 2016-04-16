@@ -32,13 +32,6 @@ public class StartupRole {
     private static final Optional<String> USER_TYPE = Optional.of("User");
     private static final String TYPE = "type";
     private static final String PAST_INVESTOR = "past_investor";
-    private static final String BIO = "bio";
-    private static final String LOGO_URL = "logo_url";
-    private static final String IMAGE = "image";
-    private static final String PRODUCT_DESC = "product_desc";
-    private static final String ANGELLIST_URL = "angellist_url";
-    private static final String COMPANY_URL = "company_url";
-    private static final String NAME = "name";
 
     @JsonProperty(ID)
     private Optional<Long> id = Optional.empty();

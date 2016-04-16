@@ -116,8 +116,6 @@ public class Startup {
     private List<Map<String, String>> screenshots = ImmutableList.of();
     @JsonSerialize(using = StringSerializer.class)
     @JsonDeserialize(using = StringDeserializer.class)
-    @JsonProperty(ORGANIZATION_ID)
-    private Optional<String> organizationId = Optional.empty();
     @JsonProperty(ROLES)
     private Optional<Set<StartupRole>> roles = Optional.empty();
 
@@ -148,7 +146,6 @@ public class Startup {
                     List<CompanyType> companyTypes,
                     Optional<Status> status,
                     List<Map<String, String>> screenshots,
-                    Optional<String> organizationId,
                     Optional<Set<StartupRole>> roles) {
         this.id = id;
         this.hidden = hidden;
@@ -173,7 +170,6 @@ public class Startup {
         this.companyTypes = companyTypes;
         this.status = status;
         this.screenshots = screenshots;
-        this.organizationId = organizationId;
         this.roles = roles;
     }
 
@@ -382,7 +378,6 @@ public class Startup {
                 Objects.equals(this.companyTypes, other.companyTypes) &&
                 Objects.equals(this.status, other.status) &&
                 Objects.equals(this.screenshots, other.screenshots) &&
-                Objects.equals(this.organizationId, other.organizationId) &&
                 Objects.equals(this.roles, other.roles);
     }
 
@@ -412,7 +407,6 @@ public class Startup {
                 companyTypes,
                 status,
                 screenshots,
-                organizationId,
                 roles
         );
     }
@@ -443,7 +437,6 @@ public class Startup {
                 .add(COMPANY_TYPES, companyTypes)
                 .add(STATUS, status)
                 .add(SCREENSHOTS, screenshots)
-                .add(ORGANIZATION_ID, organizationId)
                 .add(ROLES, roles)
                 .toString();
     }
@@ -458,14 +451,6 @@ public class Startup {
 
     public List<CompanyType> getCompanyTypes() {
         return companyTypes;
-    }
-
-    public Optional<String> getOrganizationId() {
-        return organizationId;
-    }
-
-    public String requireOrganizationId() {
-        return organizationId.get();
     }
 
     public Optional<Set<StartupRole>> getRoles() {
@@ -509,7 +494,6 @@ public class Startup {
             this.companyTypes = startup.getCompanyTypes();
             this.status = startup.getStatus();
             this.screenshots = startup.getScreenshots();
-            this.organizationId = startup.getOrganizationId();
             this.roles = startup.getRoles();
         }
 
@@ -749,16 +733,6 @@ public class Startup {
             return this;
         }
 
-        public Builder withOrganizationId(Optional<String> organizationId) {
-            this.organizationId = organizationId;
-            return this;
-        }
-
-        public Builder withOrganizationId(String organizationId) {
-            this.organizationId = Optional.of(organizationId);
-            return this;
-        }
-
         public Builder withRoles(Optional<Set<StartupRole>> roles) {
             this.roles = roles;
             return this;
@@ -770,7 +744,7 @@ public class Startup {
         }
 
         public Startup build() {
-            return new Startup(id, hidden, communityProfile, name, angellistUrl, logoUrl, thumbUrl, quality, productDesc, highConcept, followerCount, companyUrl, createdAt, updatedAt, twitterUrl, blogUrl, videoUrl, markets, locations, companySize, companyTypes, status, screenshots, organizationId, roles);
+            return new Startup(id, hidden, communityProfile, name, angellistUrl, logoUrl, thumbUrl, quality, productDesc, highConcept, followerCount, companyUrl, createdAt, updatedAt, twitterUrl, blogUrl, videoUrl, markets, locations, companySize, companyTypes, status, screenshots, roles);
         }
     }
 
