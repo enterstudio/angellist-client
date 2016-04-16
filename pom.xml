@@ -4,7 +4,7 @@
 
     <groupId>vc.inreach.angellist</groupId>
     <artifactId>angellist-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>AngelList Client</name>
@@ -30,7 +30,7 @@
     <scm>
         <connection>scm:git:git@github.com:inreachventures/angellist-client.git</connection>
         <url>https://github.com/inreachventures/angellist-client</url>
-        <tag>HEAD</tag>
+        <tag>angellist-client-0.0.1</tag>
     </scm>
 
     <developers>
