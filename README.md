@@ -34,3 +34,9 @@ final Client client = ClientBuilder.newClient(new ClientConfig(jacksonProvider))
 ```
 
 Currently the only implementation for the AngellistClient is the HttpAngellistClient which uses [Jersey 2 HTTP client](https://jersey.java.net/documentation/latest/client.html). How very [Dropwizard](http://dropwizard.io)-y.
+
+## Building
+
+Contributing back to the project would be greatly appreciated. The project includes an integration test which hits the live AngelList API with your API key.
+
+Obviously I don't want to commit our key so you need to add the key to `src/test/resources/.angellist_key` and make sure you never commit it!
