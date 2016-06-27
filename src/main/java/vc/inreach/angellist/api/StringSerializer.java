@@ -9,7 +9,7 @@ import com.google.common.base.Strings;
 import java.io.IOException;
 import java.util.Optional;
 
-public class StringSerializer extends JsonSerializer<Optional<String>> {
+class StringSerializer extends JsonSerializer<Optional<String>> {
 
     private final ToStringSerializer stringSerializer = ToStringSerializer.instance;
 

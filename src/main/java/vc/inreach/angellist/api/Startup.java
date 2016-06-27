@@ -41,7 +41,6 @@ public class Startup {
     public static final String SCREENSHOTS = "screenshots";
     public static final String COMPANY_SIZE = "company_size";
     public static final String COMPANY_TYPES = "company_types";
-    public static final String ORGANIZATION_ID = "organization_id";
     public static final String ROLES = "roles";
     public static final String ANGELLIST_BASE_URL = "https://angel.co/";
     private static final String EMPTY = "";

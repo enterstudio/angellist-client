@@ -8,7 +8,7 @@ import com.google.common.base.Strings;
 import java.io.IOException;
 import java.util.Optional;
 
-public class StringDeserializer extends JsonDeserializer<Optional<String>> {
+class StringDeserializer extends JsonDeserializer<Optional<String>> {
     @Override
     public Optional<String> deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {
         final String value = parser.getText();
