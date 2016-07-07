@@ -11,6 +11,7 @@ import io.dropwizard.jackson.Jackson;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import vc.inreach.angellist.api.*;
 
@@ -21,6 +22,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@Ignore
 public class HttpAngellistClientIntegrationTest {
 
     private AngellistClient angellistClient;
