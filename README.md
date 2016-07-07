@@ -18,7 +18,7 @@ The project can be found in maven central:
 <dependency>
     <groupId>vc.inreach.angellist</groupId>
     <artifactId>angellist-client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
