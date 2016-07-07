@@ -2,6 +2,7 @@ package vc.inreach.angellist.client;
 
 import vc.inreach.angellist.api.*;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AngellistClient {
@@ -19,5 +20,7 @@ public interface AngellistClient {
     Optional<ParentTags> parentTags(long id, int page);
 
     Optional<ChildTags> childTags(long id, int page);
+
+    List<SearchEntry> search(String query, SearchEntry.Type type);
 
 }

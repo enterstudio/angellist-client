@@ -11,17 +11,16 @@ import io.dropwizard.jackson.Jackson;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import vc.inreach.angellist.api.*;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-@Ignore
 public class HttpAngellistClientIntegrationTest {
 
     private AngellistClient angellistClient;
@@ -103,5 +102,17 @@ public class HttpAngellistClientIntegrationTest {
                 .build();
 
         assertEquals(expected, entity.get());
+    }
+
+    @Test
+    public void search() throws Exception {
+        final List<SearchEntry> results = angellistClient.search("top10", SearchEntry.Type.STARTUP);
+        assertFalse(results.isEmpty());
+        final Optional<SearchEntry> top10 = results.stream()
+                .filter(entry -> entry.getName().equals("Top10"))
+                .findAny();
+        assertTrue(top10.isPresent());
+        assertTrue(top10.get().getPic().isPresent());
+        assertEquals(SearchEntry.Type.STARTUP, top10.get().getType());
     }
 }

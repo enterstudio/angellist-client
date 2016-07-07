@@ -8,8 +8,10 @@ import vc.inreach.angellist.api.*;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import java.util.List;
 import java.util.Optional;
 
 public class HttpAngellistClient implements AngellistClient {
@@ -23,12 +25,16 @@ public class HttpAngellistClient implements AngellistClient {
     private static final String STARTUPS = PREFIX + "tags/{tag}/startups";
     private static final String TAG_PARENTS = PREFIX + "tags/{tag}/parents";
     private static final String TAG_CHILDREN = PREFIX + "tags/{tag}/children";
+    private static final String SEARCH = PREFIX + "search";
     private static final String ID = "id";
     private static final String ACCESS_TOKEN = "access_token";
     private static final String PAGE = "page";
     private static final String TAG = "tag";
     private static final String SLUGS = PREFIX + "search/slugs";
     private static final String QUERY = "query";
+    private static final GenericType<ImmutableList<SearchEntry>> SEARCH_TYPE = new GenericType<ImmutableList<SearchEntry>>() {
+    };
+    private static final String TYPE = "type";
 
     private final Client client;
     private final String apiKey;
@@ -156,6 +162,18 @@ public class HttpAngellistClient implements AngellistClient {
         } catch (NotFoundException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public List<SearchEntry> search(String query, SearchEntry.Type type) {
+        LOGGER.info("Searching for {}s from Angellist. Query: {}", type, query);
+
+        return client.target(uriBuilder(SEARCH))
+                .queryParam(QUERY, query)
+                .queryParam(TYPE, type)
+                .queryParam(ACCESS_TOKEN, apiKey)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get(SEARCH_TYPE);
     }
 
     private UriBuilder uriBuilder(String path) {
